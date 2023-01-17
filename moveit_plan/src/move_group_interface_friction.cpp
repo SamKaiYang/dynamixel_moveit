@@ -77,7 +77,7 @@ int main(int argc, char** argv)
   // MoveIt operates on sets of joints called "planning groups" and stores them in an object called
   // the `JointModelGroup`. Throughout MoveIt the terms "planning group" and "joint model group"
   // are used interchangeably.
-  static const std::string PLANNING_GROUP = "teco_arm";
+  static const std::string PLANNING_GROUP = "dynamixel_arm";
 
   // The :planning_interface:`MoveGroupInterface` class can be easily
   // setup using just the name of the planning group you would like to control and plan for.
@@ -228,12 +228,13 @@ int main(int argc, char** argv)
   // joint_group_positions[0] = -tau / 6;  // -1/6 turn in radians
 
   // init 位置的各軸角度
-  joint_group_positions[0] = Convert(0);
-  joint_group_positions[1] = Convert(0);
-  joint_group_positions[2] = Convert(0);
-  joint_group_positions[3] = Convert(0);
-  joint_group_positions[4] = Convert(0);
-  joint_group_positions[5] = Convert(0);
+  joint_group_positions = {-0.14526608, -1.15769058, -0.39972595,  0.1055973 ,  0.50377527, -0.4700161};
+  joint_group_positions[0] = -joint_group_positions[0];
+  // joint_group_positions[1] = Convert(0);
+  joint_group_positions[2] = -joint_group_positions[2];
+  // joint_group_positions[3] = Convert(0);
+  joint_group_positions[4] = -joint_group_positions[4];
+  joint_group_positions[5] = -joint_group_positions[5];
 
   moveit::core::RobotStatePtr robot_state = move_group_interface.getCurrentState();
   move_group_interface.setJointValueTarget(joint_group_positions);
@@ -263,7 +264,7 @@ int main(int argc, char** argv)
 
   // 在execute 後,獲取當前位置, 與姿態
   ROS_INFO_STREAM("get_pose: " << move_group_interface.getCurrentPose().pose);
-  std::vector<double> RPY_2 = move_group_interface.getCurrentRPY("6");
+  std::vector<double> RPY_2 = move_group_interface.getCurrentRPY("Link6");
   for(std::size_t i = 0; i < 3; ++i)
   {
     ROS_INFO("RPY: %f", RPY_2[i]);
@@ -296,13 +297,20 @@ int main(int argc, char** argv)
   // joint_group_positions[0] = -tau / 6;  // -1/6 turn in radians
 
   // init 位置的各軸角度
-  joint_group_positions[0] = Convert(0);
-  joint_group_positions[1] = Convert(90);
-  joint_group_positions[2] = Convert(0);
-  joint_group_positions[3] = Convert(0);
-  joint_group_positions[4] = Convert(0);
-  joint_group_positions[5] = Convert(0);
-
+  // joint_group_positions[0] = Convert(0);
+  // joint_group_positions[1] = Convert(90);
+  // joint_group_positions[2] = Convert(0);
+  // joint_group_positions[3] = Convert(0);
+  // joint_group_positions[4] = Convert(0);
+  // joint_group_positions[5] = Convert(0);
+  joint_group_positions = {-0.28820737,  2.29207808,  2.0308636 , -1.5183363 ,  0.48963711, -0.58760908};
+  joint_group_positions[0] = -joint_group_positions[0];
+  // joint_group_positions[1] = Convert(0);
+  joint_group_positions[2] = -joint_group_positions[2];
+  // joint_group_positions[3] = Convert(0);
+  joint_group_positions[4] = -joint_group_positions[4];
+  joint_group_positions[5] = -joint_group_positions[5];
+  
   robot_state = move_group_interface.getCurrentState();
   move_group_interface.setJointValueTarget(joint_group_positions);
 
@@ -331,7 +339,7 @@ int main(int argc, char** argv)
 
   // 在execute 後,獲取當前位置, 與姿態
   ROS_INFO_STREAM("get_pose: " << move_group_interface.getCurrentPose().pose);
-  RPY_2 = move_group_interface.getCurrentRPY("6");
+  RPY_2 = move_group_interface.getCurrentRPY("Link6");
   for(std::size_t i = 0; i < 3; ++i)
   {
     ROS_INFO("RPY: %f", RPY_2[i]);
@@ -400,7 +408,7 @@ int main(int argc, char** argv)
 
   // 在execute 後,獲取當前位置, 與姿態
   ROS_INFO_STREAM("get_pose: " << move_group_interface.getCurrentPose().pose);
-  RPY_2 = move_group_interface.getCurrentRPY("6");
+  RPY_2 = move_group_interface.getCurrentRPY("Link6");
   for(std::size_t i = 0; i < 3; ++i)
   {
     ROS_INFO("RPY: %f", RPY_2[i]);

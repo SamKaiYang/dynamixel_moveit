@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: single_arm_v12_plus
+    relative_path: urdf/single_arm_v12_plus.urdf
+    xacro_args: ""
+  SRDF:
+    relative_path: config/single_arm_v12_plus.srdf
+  CONFIG:
+    author_name: samyang
+    author_email: tt00621212@gmail.com
+    generated_timestamp: 1673947867
